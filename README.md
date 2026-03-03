@@ -4,9 +4,9 @@ A Discord bot that integrates with the Polsec API to manage and execute actions 
 
 ## Todos (Order: Priority)
 
-[ ] Implement `messageCreate` event.
-[ ] Implement test commands.
-[ ] Implement Polsec API
+- [ ] Implement `messageCreate` event.
+- [ ] Implement test commands.
+- [ ] Implement Polsec API
 
 ## Issues
 
