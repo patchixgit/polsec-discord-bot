@@ -37,7 +37,7 @@ const event: BotEvent = {
         case "blacklist":
           if (
             message.member?.roles.cache.some((role) =>
-              command.restrictions?.roleRestrictions?.Roles.includes(role.id),
+              command.restrictions?.roleRestrictions?.Roles.has(role.id),
             )
           ) {
             return message.reply("You are not allowed to use this command.");
@@ -46,7 +46,7 @@ const event: BotEvent = {
         case "whitelist":
           if (
             !message.member?.roles.cache.some((role) =>
-              command.restrictions?.roleRestrictions?.Roles.includes(role.id),
+              command.restrictions?.roleRestrictions?.Roles.has(role.id),
             )
           ) {
             return message.reply("You are not allowed to use this command.");
@@ -67,7 +67,7 @@ const event: BotEvent = {
       switch (userRestrictionMode) {
         case "blacklist":
           if (
-            command.restrictions.userRestrictions.Users.includes(
+            command.restrictions.userRestrictions.Users.has(
               message.author.id,
             )
           ) {
@@ -76,7 +76,7 @@ const event: BotEvent = {
           break;
         case "whitelist":
           if (
-            !command.restrictions.userRestrictions.Users.includes(
+            !command.restrictions.userRestrictions.Users.has(
               message.author.id,
             )
           ) {

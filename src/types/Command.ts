@@ -6,12 +6,12 @@ import { PolsecBotClient } from "./Client.js";
 
 type RoleRestrictions = {
 	MainMode: "whitelist" | "blacklist";
-	Roles: Array<Discord.Snowflake>;
+	Roles: Set<Discord.Snowflake>;
 };
 
 type UserRestrictions = {
 	MainMode: "whitelist" | "blacklist";
-	Users: Array<Discord.Snowflake>;
+	Users: Set<Discord.Snowflake>;
 };
 
 export interface Command {
