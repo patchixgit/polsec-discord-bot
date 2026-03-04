@@ -29,5 +29,8 @@ export interface Command {
 		client: PolsecBotClient,
 		message: Discord.Message,
 		args: Array<string>,
+		context: {
+			processTime: number;
+		}
 	) => Promise<void>;
 }

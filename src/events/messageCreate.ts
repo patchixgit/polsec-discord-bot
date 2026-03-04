@@ -7,6 +7,8 @@ const event: BotEvent = {
   name: Events.MessageCreate,
 
   async exec(client, message: Message) {
+    const beforeProcessing = performance.now();
+
     if (message.author.bot) return;
 
     const prefix = Bun.env.PREFIX;
@@ -90,7 +92,9 @@ const event: BotEvent = {
     }
 
     try {
-      await command.exec(client, message, args);
+      await command.exec(client, message, args, {
+        processTime: performance.now() - beforeProcessing,
+      });
     } catch (err) {
       console.error(`Error executing command ${command.name}:`, err);
       await message.reply(
