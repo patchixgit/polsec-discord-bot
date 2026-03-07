@@ -50,8 +50,8 @@ export type PolsecEditableCfg = {
   discordWebhookUrl: string;
 };
 
-function ProcessScriptsData(data: Array<any>): Set<PolsecScript> {
-  const scriptsSet = new Set<PolsecScript>();
+function ProcessScriptsData(data: Array<any>): Array<PolsecScript> {
+  const scriptsArr = [] as Array<PolsecScript>;
 
   data.forEach((scriptObj) => {
     const script: PolsecScript = {
@@ -100,17 +100,17 @@ function ProcessScriptsData(data: Array<any>): Set<PolsecScript> {
       discordWebhookUrl: scriptObj.webhook || undefined,
     };
 
-    scriptsSet.add(script);
+    scriptsArr.push(script);
   });
 
-  return scriptsSet;
+  return scriptsArr;
 }
 
 export async function GetAllScriptInfo() {
   try {
     const res = await Bun.fetch(BASE_API_URL, {
+      method: "GET",
       headers: {
-        method: "GET",
         Authentication: Bun.env.POLSEC_API_KEY!,
       },
     });
@@ -124,8 +124,9 @@ export async function GetAllScriptInfo() {
 
     const plaintextData = await res.text();
 
+    let jsonData: any;
     try {
-      JSON.parse(plaintextData);
+      jsonData = JSON.parse(plaintextData);
     } catch (e) {
       return {
         success: false,
@@ -133,9 +134,10 @@ export async function GetAllScriptInfo() {
       };
     }
 
-    const jsonData = JSON.parse(plaintextData);
-
-    return ProcessScriptsData(jsonData.data);
+    return {
+      success: true,
+      scripts: ProcessScriptsData(jsonData.data)
+    }
   } catch (e) {
     return {
       success: false,
@@ -210,16 +212,15 @@ export async function EditScriptSource(newSource: Attachment) {
 
   const resAsText = await applyRes.text();
 
+  let parsedData: any;
   try {
-    JSON.stringify(resAsText);
+    parsedData = JSON.parse(resAsText);
   } catch (e) {
     return {
       success: false,
       msg: "Parse Error (Unknown Issue). " + resAsText,
     };
   }
-
-  const parsedData = JSON.parse(resAsText);
 
   return {
     success: true,

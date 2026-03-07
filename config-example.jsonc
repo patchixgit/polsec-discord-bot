@@ -1,0 +1,33 @@
+/*
+! CHANGE THESE VALUES TO YOUR OWN SCRIPTS AND SETTINGS !
+! Change Filename to config.jsonc ONCE DONE! !
+*/
+
+{
+  "Scripts": {
+    "ScriptName": "ApiKey",
+    "ScriptName2": "ApiKey2"
+  },
+
+  "StickySelectScript": { // When you switch scripts, if this is enabled, it will stay at that script. Otherwise, it'll choose the first script in
+    "Enabled": true      // the Scripts list every time the bot starts up.
+  },
+
+  "ScriptSwitching": {
+    "Enabled": true, // If false, the bot won't switch scripts and just stick with the first one in the list.
+    
+    // Allow certain users / role to switch scripts ?
+
+    "AllowedUsers": {
+      "allowUsers": true, // If false, the bot won't check for user permissions and anyone can switch scripts.
+      "Mode": "Whitelist", // "Whitelist" or "Blacklist"
+      "Users": ["UserID1", "UserID2"]
+    },
+
+    "AllowedRoles": {
+      "allowRoles": true, // If false, the bot won't check for role permissions and anyone can switch scripts.
+      "Mode": "Whitelist", // "Whitelist" or "Blacklist"
+      "Roles": ["RoleID1", "RoleID2"]
+    }
+  }
+}

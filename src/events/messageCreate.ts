@@ -53,9 +53,9 @@ const event: BotEvent = {
           }
           break;
         default:
-          console.warn(
-            `Unknown role restriction mode for command ${command.name}.`,
-          );
+          // console.warn(
+          //   `Unknown role restriction mode for command ${command.name}.`,
+          // );
           break;
       }
     }
@@ -84,9 +84,9 @@ const event: BotEvent = {
           }
           break;
         default:
-          console.warn(
-            `Unknown user restriction mode for command ${command.name}.`,
-          );
+          // console.warn(
+          //   `Unknown user restriction mode for command ${command.name}.`,
+          // );
           break;
       }
     }
