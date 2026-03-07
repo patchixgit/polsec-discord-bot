@@ -1,8 +1,8 @@
-const BASE_API_URL = "https://api.getpolsec.com/api/v1";
+const BASE_API_URL = "https://api.getpolsec.com/api/v1/blacklist";
 
 export async function blacklistByHWID(hwid: string, note = "No Note Provided") {
   try {
-    const res = await Bun.fetch(BASE_API_URL + "/blacklist/hwids", {
+    const res = await Bun.fetch(BASE_API_URL + "/hwids", {
       method: "POST",
       headers: {
         Authentication: Bun.env.POLSEC_API_KEY!,
@@ -23,7 +23,7 @@ export async function blacklistByHWID(hwid: string, note = "No Note Provided") {
 
 export async function removeBlacklistByHWID(hwid: string) {
   try {
-    const res = await Bun.fetch(BASE_API_URL + "/blacklist/hwids", {
+    const res = await Bun.fetch(BASE_API_URL + "/hwids", {
       method: "DELETE",
       headers: {
         Authentication: Bun.env.POLSEC_API_KEY!,
@@ -51,7 +51,7 @@ export async function blacklistByDiscordID(
   note = "No Note Provided",
 ) {
   try {
-    const res = await Bun.fetch(BASE_API_URL + "/blacklist/users", {
+    const res = await Bun.fetch(BASE_API_URL + "/users", {
       method: "POST",
       headers: {
         Authentication: Bun.env.POLSEC_API_KEY!,
@@ -72,7 +72,7 @@ export async function blacklistByDiscordID(
 
 export async function removeBlacklistByDiscordID(discordId: string) {
   try {
-    const res = await Bun.fetch(BASE_API_URL + "/blacklist/users", {
+    const res = await Bun.fetch(BASE_API_URL + "/users", {
       method: "DELETE",
       headers: {
         Authentication: Bun.env.POLSEC_API_KEY!,
