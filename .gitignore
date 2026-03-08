@@ -123,6 +123,10 @@ dist
 # Firebase cache directory
 .firebase/
 
+# Cache Directory for Polsec Discord Bot
+
+cache/*
+
 # TernJS port file
 .tern-port
 

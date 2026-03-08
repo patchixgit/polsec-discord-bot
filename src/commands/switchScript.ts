@@ -1,20 +1,19 @@
 import { GetAllScriptInfo } from "../api/scripts.js";
 import { Command } from "../types/Command.js";
+import { PersistItems } from "../types/PersistItems.js";
 
-import path from 'path';
-import fs from 'fs'
+import path from "path";
+import fs from "fs";
+import persist from "node-persist";
 
-const configPath = path.resolve(process.cwd(), 'config.jsonc');
+const configPath = path.resolve(process.cwd(), "config.jsonc");
 let configuration: any;
 try {
-  configuration = Bun.JSON5.parse(
-    fs.readFileSync(configPath, 'utf-8'),
-  );
+  configuration = Bun.JSON5.parse(fs.readFileSync(configPath, "utf-8"));
 } catch (err) {
   console.error(`Failed to read configuration file at ${configPath}:`, err);
   configuration = {};
 }
-
 
 const ScriptSwitching = configuration.ScriptSwitching || {};
 
@@ -28,7 +27,7 @@ const commandObj: Partial<Command> = {
 
   restrictions: {
     userRestrictions: {},
-    roleRestrictions: {}
+    roleRestrictions: {},
   },
 
   async exec(client, message, args, extras) {
@@ -77,7 +76,7 @@ const commandObj: Partial<Command> = {
         return;
       }
 
-      scriptName = scriptInfo.scripts[0]! .scriptName || requested;
+      scriptName = scriptInfo.scripts[0]!.scriptName || requested;
     } catch (err) {
       process.env.POLSEC_API_KEY = previousKey;
       await message.reply(
@@ -86,7 +85,16 @@ const commandObj: Partial<Command> = {
       return;
     }
 
-    await message.reply(`Switched active script to: ${scriptName} (${requested})`);
+    await message.reply(
+      `Switched active script to: ${scriptName} (${requested})`,
+    );
+
+    if (configuration.StickySelectScript?.Enabled) {
+      await persist.setItem(
+        PersistItems.CurrentStickyScript,
+        process.env.POLSEC_API_KEY,
+      );
+    }
   },
 } as Command;
 
