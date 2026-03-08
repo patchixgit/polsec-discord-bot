@@ -47,7 +47,7 @@ const commandObj: Partial<Command> = {
     const scriptsCfg = configuration.Scripts || {};
     if (!(requested in scriptsCfg)) {
       await message.reply(
-        "Invalid script name. Please check the available scripts and try again. Note: this comparison is case sensitive.",
+        "Invalid script name. Please check the available scripts and try again. Note: this comparison is case sensitive. View Scripts with the availablescripts command.",
       );
       return;
     }

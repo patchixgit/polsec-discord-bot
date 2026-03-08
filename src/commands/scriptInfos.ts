@@ -12,7 +12,6 @@ export default {
 
   async exec(client, message, args, extras) {
     const scriptinfo = await GetAllScriptInfo();
-    console.log(`Received script info: ${JSON.stringify(scriptinfo)}`);
 
     if (scriptinfo.success) {
       const scriptInfoString = JSON.stringify(scriptinfo.scripts, null, 2);

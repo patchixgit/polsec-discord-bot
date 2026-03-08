@@ -99,7 +99,9 @@ for (const file of eventFiles) {
   } catch (err) {
     console.error(`Failed to read configuration file at ${configPath}:`, err);
     configuration = {};
-  }
+  };
+
+  client.config = configuration;
 
   if (configuration.StickySelectScript.Enabled) {
     const stickyScript = await persist.getItem(
