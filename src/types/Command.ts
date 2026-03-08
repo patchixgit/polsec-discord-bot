@@ -23,6 +23,7 @@ export interface Command {
 	restrictions?: {
 		roleRestrictions?: RoleRestrictions;
 		userRestrictions?: UserRestrictions;
+		permsRestrictions?: Discord.PermissionResolvable[];
 	};
 
 	exec: (

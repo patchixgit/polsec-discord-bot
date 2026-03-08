@@ -91,6 +91,19 @@ const event: BotEvent = {
       }
     }
 
+    if (command.restrictions?.permsRestrictions) {
+      const missingPerms = command.restrictions.permsRestrictions.filter(
+        (perm) =>
+          !message.member?.permissions.has(perm),
+      );
+      
+      if (missingPerms.length > 0) {
+        return message.reply(
+          `You are missing the following permissions to use this command: ${missingPerms.join(", ")}`,
+        );
+      }
+    }
+
     try {
       await command.exec(client, message, args, {
         processTime: performance.now() - beforeProcessing,
