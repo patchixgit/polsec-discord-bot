@@ -2,6 +2,10 @@
 
 A Discord bot that integrates with the Polsec API to manage and execute actions for users’ scripts.
 
+## Note
+
+The polsec api is scheduled to change drastically and a full rewrite. with the current state of the api, the project is now on hold.
+
 ## Todos (Order: Priority)
 
 - [ ] Implement Polsec API
